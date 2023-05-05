@@ -1,0 +1,184 @@
+.nav1 {
+    height: 8vh;
+    background-color: rgb(15, 15, 15);
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.aux {
+    width: 100%;
+    height: 75px;
+}
+
+.nav-admin {
+    background-color: rgb(137, 137, 137);
+
+    padding: 10px 300px;
+    margin-top: 75px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-admin {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    max-width: 1000px;
+}
+
+.menu-admin li{
+    margin-right: 50px;
+}
+
+.menu-admin li:last-of-type{
+    margin-right: 0px;
+}
+
+.menu-admin a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu-admin a:hover {
+    text-decoration: none;
+    color: rgb(150, 0, 0);
+    
+}
+
+.menu-admin li:hover {
+    border-bottom: 1px solid rgb(150, 0, 0);
+}
+
+.actual {
+    border-bottom: 3px solid rgb(150, 0, 0);;
+}
+
+section:first-of-type {
+    display: flex;
+    justify-content: space-around;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td, table th {
+    padding: 1.3rem 2.5rem;
+}
+
+.main-table th{
+    background-color: rgb(150, 0, 0);
+    color: rgb(250, 234, 234);
+    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+tr:last-of-type td {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+td {
+    border-bottom: 1px solid rgb(181, 181, 181);
+}
+
+.main-table tr:last-of-type td {
+    border-bottom: none;
+}
+
+.t-vista-rapida {
+    margin-bottom: 60px;
+}
+
+.t-vista-rapida th {
+    text-align: left;
+}
+
+.t-vista-rapida td {
+    width: 300px;
+    height: 200px;
+}
+
+.t-vista-rapida span {
+    font-size: 50px;
+}
+
+.t-vista-rapida td div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.t-vista-rapida td div:last-of-type {
+    font-size: 2rem;
+}
+
+.t-admin td, .t-admin th {
+    text-align: left;
+    width: 300px;
+}
+
+
+.t-admin td {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.t-admin span {
+    background-color: grey;
+    border-radius: 15px;
+    padding: 2px 8px 2px 8px;
+    color: white;
+}
+
+.t-admin td:hover {
+    border-bottom: 1px solid black;
+}
+
+.t-pedidos-recientes {
+    width: 100%;
+}
+
+.t-pedidos-recientes th {
+    text-align: left;
+}
+
+.td-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.tabla-secundaria {
+    text-align: left;
+}
+
+.tabla-secundaria th {
+    background-color: white;
+    color: black;
+}
+
+.tabla-secundaria td {
+    max-width: 500px;
+}
+
+secition {
+    margin-top: 2000px;
+}
+
+.icono-panel {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 200px;
+}

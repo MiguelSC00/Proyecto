@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/css/stylesTienda.css</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/MostrarProductos.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/admin.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/IniciarSesion.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/CargarPanel.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/dao/DaoProducto.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/headerCliente.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/AgregarCarrito.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/CerrarSesion.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/EliminarProductoCesta.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/header.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/css/stylesLogin.css</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/CrearUsuario.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/modificarUsuario.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/CrearProducto.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/cesta.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/modificarProducto.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/iniciarSesion.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/modelo/Producto.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/tienda.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/gestionProductos.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/modelo/Usuario.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/css/stylesCesta.css</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/ModificarUsuario.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/crearUsuario.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/asesorias.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/css/stylesAsesorias.css</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/src/java/controladores/EliminarProducto.java</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/headerAdmin.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/admin/crearProducto.jsp</file>
+            <file>file:/C:/Users/Miguel/Desktop/ProyectoFinalGrado/web/headerEntrenador.jsp</file>
+        </group>
+    </open-files>
+</project-private>

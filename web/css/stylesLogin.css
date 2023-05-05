@@ -1,0 +1,61 @@
+
+
+.nav-tabs {
+    width: 30vw;
+    margin: 7rem auto;
+    display: flex;
+}
+
+.nav-item {
+    width: 50%;
+    background-color: rgb(15, 15, 15);
+}
+
+.nav-item:focus {
+    width: 50%;
+    background-color: red;
+}
+
+.nav-link {
+    width: 100%;
+    color: white;
+}
+
+
+.tab-content {
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.tab-content form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.tab-content input, .tab-content button {
+    font-size: 18px;
+}
+
+.error {
+    color: red;
+}
+
+@media (max-width: 900px) {
+    .nav-tabs {
+        width: 90%;
+    }
+
+    .tab-content {
+        width: 80%;
+        margin-bottom: 50px;
+    }
+
+    .tab-content form {
+        width: 100%;
+    }
+}
+
+.contenedor {
+    margin-top: 50px;
+}
+

@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /** Reset para REMS - 62.5% = 10px de 16px **/
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+.contenedor {
+    width: 97%;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
+.main-header {
+    background-image: url(../img/main-header-pic.webp) ;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    min-height: 60rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fixed-nav {
+    height: 75px;
+    background-color: rgb(15, 15, 15);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-transparente {
+    background-color: rgba(15, 15, 15, 0.8);
+}
+
+.icono-mancuerna {
+    width: 52px;
+    position: absolute;
+    left: 50px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    color: white;
+    font-weight: bold;
+}
+
+.menu li {
+    margin-right: 50px;
+    padding: .1rem .8rem .1rem .8rem;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+}
+
+.pagina-actual {
+    border: 3px solid white;
+    border-radius: 25px;
+}
+
+.barras {
+    width: 50px;
+    height: 50px;
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .menu {
+        flex-direction: column;
+    }
+
+    .barras {
+        display: block;
+    }
+}
+
+@media (max-width: 900px) {
+    .fixed-nav a {
+        display: block;
+        text-align: center;
+        margin: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+    }
+
+    .barras:hover {
+        cursor: pointer;
+    }
+
+    .barras:hover ~ .fixed-nav a {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .header-secundario {
+        height: 40vh;
+    }
+}
+
+@media (max-width: 1200px) {
+    .contenido-nosotros {
+        flex-direction: column;
+    }
+}
+
+.titulo {
+    background-color: rgba(0, 0, 0, 0.65);
+    width: 40rem;
+    height: 10rem;
+    border-radius: 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.texto-titulo {
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+}
+
+.seccion {
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+.seccion:last-of-type {
+    border-bottom: none;
+}
+
+.seccion h1 {
+    font-size: 4rem;
+    font-weight: normal;
+    
+}
+
+
+.fondo-iconos {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    background-color: rgb(15, 15, 15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    width: 100%;
+    height: 120px;
+    background-color: rgb(15, 15, 15);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    color: white;
+}
+
+.iconos-redes {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nosotros {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 650px;
+}
+
+.contenido-nosotros {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.iconos-nosotros {
+    width: 400px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.boton-mas {
+    height: 50px;
+    width: 150px;
+    max-width: 300px;
+
+    background-color: brown;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 2rem;
+    color: aliceblue;
+
+    transition-duration: .3s;
+}
+
+.boton-mas:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 5px 5px rgba(10, 10, 10, 0.3);
+
+}
+
+.asesorias {
+    width: 80%;
+    height: 700px;
+    background-color: rgb(15, 15, 15);
+    border-radius: 10px;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.flex-se {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.p-asesorias {
+    max-width: 700px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-evenly;
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+.asesorias img {
+    border-radius: 10px;
+}
