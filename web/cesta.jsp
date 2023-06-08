@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Mi cesta</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
         <link rel="stylesheet" type="text/css" href="css/stylesCesta.css"/>
     </head>
@@ -24,10 +24,16 @@
             int indice = 0;
             HttpSession sesion = request.getSession();
             List<Producto> cesta = (ArrayList)sesion.getAttribute("cesta");
+            List<Integer> cantidades = (ArrayList)sesion.getAttribute("cantidades");
             
             for (Producto p : cesta) {
-                precioTotal += p.getPrecio();
+                precioTotal += p.getPrecio() * cantidades.get(indice);
+                indice++;
             }
+            
+            indice = 0;
+            
+            precioTotal = Math.round(precioTotal * 100.0) / 100.0;
             
             sesion.setAttribute("precioTotal", precioTotal);
         %>
@@ -53,32 +59,35 @@
         
         <section class="seccion-productos">
             <div class="productos">
-                <c:forEach items="${cesta}" var="p">
-                    <div class="producto">
-                        <img src="img/cinturon.webp" heigth="250px" width="250px" alt="Foto <?=$producto->getNombre()?>">
+                <c:if test="${!empty cesta}">
+                    <c:forEach begin="0" step="1" end="${cesta.size()-1}" var="i">
+                        <div class="producto">
+                            <img src="img/productos/${cesta.get(i).codigo}.webp" heigth="250px" width="250px" alt="Foto <?=$producto->getNombre()?>">
 
-                        <form action="EliminarProductoCesta" method="post">
-                            <h2>${p.nombre}</h2>
-                            <span>${p.precio}€</span>
+                            <form action="EliminarProductoCesta" method="post">
+                                <h2>${cesta.get(i).nombre}</h2>
+                                <span>${cesta.get(i).precio}€</span>
+                                <p>Unidades: ${cantidades.get(i)}</p>
 
-                            <%
-                            out.print("<input type='hidden' value='" + indice + "' name='indiceProducto'>");
-                            indice++;
-                            %>
-                            <br><input type="submit" name="eliminarProducto" value="Eliminar del carrito">
-                        </form>
-                    </div>
-                </c:forEach>
+                                <%
+                                out.print("<input type='hidden' value='" + indice + "' name='indiceProducto'>");
+                                indice++;
+                                %>
+                                <br><input type="submit" name="eliminarProducto" value="Eliminar de la cesta">
+                            </form> 
+                        </div>
+                    </c:forEach>
+                </c:if> 
             </div>
 
             <div class="pagar">
                 <h2>Precio Total: ${precioTotal}€</h2>
 
-                <form action="../controlador/pagarControlador.php" method="post">
+                <form action="formularioPedido.jsp" method="post">
                     <input type="submit" name="pagar" value="Pagar">
                 </form>
 
-                <form action="../controlador/cestaControlador.php" method="post">
+                <form action="VaciarCesta" method="post">
                     <input type="submit" name="vaciarCesta" value="Vaciar cesta">
                 </form>
             </div>

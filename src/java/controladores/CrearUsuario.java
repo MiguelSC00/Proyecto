@@ -55,6 +55,7 @@ public class CrearUsuario extends HttpServlet {
             String password2 = request.getParameter("passwordR2");
             String email = request.getParameter("emailR");
             String telefono = request.getParameter("telefonoR");
+            String asesoria = "";
             
             //Si ninguna está vacía
             if (nombre != null && apellidos != null && usuario != null && password1 != null && password2 != null && email != null && telefono != null
@@ -77,7 +78,7 @@ public class CrearUsuario extends HttpServlet {
                         if (telefono.length() == 9 && telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
                             
                             //Creamos un objeto usuario con la información del formulario
-                            u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, "Cliente");
+                            u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, "Cliente", asesoria);
                             try { //Lo introducimos en la base de datos
                                 DaoUsuario.crearUsuario(u);
                                 response.sendRedirect("iniciarSesion.jsp");
@@ -124,6 +125,7 @@ public class CrearUsuario extends HttpServlet {
             String email = request.getParameter("email");
             String telefono = request.getParameter("telefono");
             String rol = request.getParameter("rol");
+            String asesoria = "";
             
             if (nombre != null && apellidos != null && usuario != null && password1 != null && password2 != null && email != null && telefono != null
             && !nombre.isEmpty() && !apellidos.isEmpty() && !usuario.isEmpty() && !password1.isEmpty() && !password2.isEmpty() && !email.isEmpty() && !telefono.isEmpty()) {
@@ -145,7 +147,7 @@ public class CrearUsuario extends HttpServlet {
                         if (telefono.length() == 9 && telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
                             
                             //Creamos un objeto usuario con la información del formulario
-                            u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, rol);
+                            u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, rol, asesoria);
                             try { //Lo introducimos en la base de datos
                                 DaoUsuario.crearUsuario(u);
                                 response.sendRedirect("MostrarUsuarios");

@@ -42,15 +42,56 @@ public class AgregarCarrito extends HttpServlet {
             
             HttpSession sesion = request.getSession();
             List<Producto> cesta = (ArrayList)sesion.getAttribute("cesta");
+            List <Integer> cantidades = (ArrayList)sesion.getAttribute("cantidades");
             
             int codigo = Integer.parseInt(request.getParameter("codigo"));
             Producto producto = null;
             
+            int contador = 0;
+
+            
+            
             try {
+                
                 producto = DaoProducto.buscarProducto(codigo);
-                cesta.add(producto);
-                sesion.setAttribute("cesta", cesta);
-                response.sendRedirect("MostrarProductos?target=tienda");
+                
+                if (producto.getStock() == 0) { //Si ya no queda stock del producto, no se puede añadir a la cesta
+                    
+                    request.setAttribute("error", "No queda stock de " + producto.getNombre());
+                    getServletContext().getRequestDispatcher("/cesta.jsp").forward(request, response);
+                    
+                } else {
+                    
+                    if (cesta.isEmpty()) {
+                
+                        cesta.add(producto);
+                        cantidades.add(1);
+
+                    } else {
+
+                        if (cesta.contains(producto)) {
+
+                            cantidades.set(cesta.indexOf(producto), cantidades.get(cesta.indexOf(producto)) +1);
+
+                        } else {
+
+                            cesta.add(producto);
+                            cantidades.add(1);
+
+                        }
+
+                    }
+
+
+                    System.out.println(cantidades);
+
+                    sesion.setAttribute("cesta", cesta);
+                    response.sendRedirect("MostrarProductos?target=tienda");
+                    
+                }
+                
+                
+                
             } catch (SQLException e) {
                 e.getErrorCode();
             }

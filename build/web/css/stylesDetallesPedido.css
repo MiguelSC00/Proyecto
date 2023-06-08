@@ -1,0 +1,108 @@
+section {
+    margin: 20px auto;
+    width: 40%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 2rem 4rem;
+}
+
+.productos {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+.producto:last-of-type {
+    border: none;
+}
+
+.producto>div {
+    margin-left: 20px;
+}
+
+
+.botom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 0.5rem 2rem;
+    color: rgb(150, 0, 0);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid black;
+    cursor: pointer;
+   
+}
+
+.nav1 {
+    height: 8vh;
+    background-color: rgb(15, 15, 15);
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.aux {
+    width: 100%;
+    height: 75px;
+}
+
+.nav-admin {
+    background-color: rgb(137, 137, 137);
+
+    padding: 10px 300px;
+    margin-top: 75px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-admin {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    max-width: 1000px;
+}
+
+.menu-admin li{
+    margin-right: 50px;
+}
+
+.menu-admin li:last-of-type{
+    margin-right: 0px;
+}
+
+.menu-admin a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu-admin a:hover {
+    text-decoration: none;
+    color: rgb(150, 0, 0);
+    
+}
+
+.menu-admin li:hover {
+    border-bottom: 1px solid rgb(150, 0, 0);
+}
+
+.actual {
+    border-bottom: 3px solid rgb(150, 0, 0);;
+}
+

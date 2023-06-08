@@ -13,7 +13,13 @@
             <ul class="menu">
                 <li><a href="index.jsp">Inicio</a></li>
                 <li><a href="nosotros.jsp">Nosotros</a></li>
-                <li><a href="asesorias.jsp">Asesorías</a></li>
+                <c:if test="${empty usuario.getSuscripcion()}">
+                    <li><a href="asesorias.jsp">Asesorías</a></li>
+                </c:if>
+                <c:if test="${!empty usuario.getSuscripcion()}">
+                    <li><a href="DetallesUsuario?usuario=${usuario.usuario}">Mi asesoría</a></li>
+                </c:if>
+                
                 <li><a href="MostrarProductos?target=tienda">Tienda</a></li>
                 <li><a href="cesta.jsp"><img src="img/cesta.png" width="22px" height="22px"></img>(${cesta.size()})</a></li>
                 <li><a href="perfil.jsp">Mi cuenta</a></li>

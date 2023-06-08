@@ -25,6 +25,8 @@ public class DaoProducto {
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/pruebaproyecto?useSSL=false&allowPublicKeyRetrieval=true",
                 "root", "");
+//                return DriverManager.getConnection("jdbc:mysql://10.100.18.253:3306/proyecto?useSSL=false&allowPublicKeyRetrieval=true",
+//                "root", "BIPobs46866");
     }
     
     public static void desconectarBD(Connection con) {
@@ -148,6 +150,22 @@ public class DaoProducto {
         return n;
         
     }
+    
+    public static void restarStock(Producto p, int n) throws SQLException {
+        
+        Connection con = conectarBD();
+        
+        PreparedStatement consulta = con.prepareStatement(
+                "update productos set  stock=stock-? where codigo=?");
+        
+        consulta.setInt(1, n);
+        consulta.setInt(2, p.getCodigo());
+
+        desconectarBD(con);
+        
+    }
+    
+    
     
        
 }

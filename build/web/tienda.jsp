@@ -13,8 +13,11 @@
         <title>Tienda</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
         <link rel="stylesheet" type="text/css" href="css/stylesTienda.css"/>
+        
     </head>
     <body>
+        
+        <script src="scripts/SweetAlet.js"></script>
         
         <c:choose>
             <c:when test="${empty usuario}">
@@ -38,17 +41,22 @@
         <section class="seccion-productos">
             <c:forEach items="${productos}" var="p">
                 <div class="producto">
-                    <img src="img/cinturon.webp" heigth="350px" width="350px">
+                    <img src="img/productos/${p.codigo}.webp" heigth="350px" width="350px">
                     
-                    <form action="AgregarCarrito" method="post">
+                    <c:if test="${empty usuario}">
+                        <form action="iniciarSesion.jsp" method="post">
+                    </c:if>
+                    <c:if test="${!empty usuario}">
+                        <form action="AgregarCarrito" method="post">
+                    </c:if>
                         <div>
                             <h2>${p.nombre}</h2>
                             <span>${p.precio}</span>
                         </div>
-
+                        
                         <div>
                             <input type="hidden" value="${p.codigo}" name="codigo"> 
-                            <input type="submit" name="submit" value="Añadir al carrito">
+                            <input type="submit" name="submit" value="Añadir al carrito"> 
                         </div>
                     </form>
                 </div>

@@ -29,7 +29,7 @@
             <div>
                 <ul class="menu-admin">
                     <li class="actual"><a href="MostrarUsuarios">Gestionar usuarios</a></li>
-                    <li><a href="MostrarProductos">Gestionar productos</a></li>
+                    <li><a href="MostrarProductos?target=administrar">Gestionar productos</a></li>
                     <li><a href="">Gestionar pedidos</a></li>
                 </ul>
             </div>
@@ -63,10 +63,10 @@
                         <td><c:out value="${u.telefono}"/></td>
                         <td><c:out value="${u.rol}"/></td>
                         <td class="modificar">
-                            <a href="ModificarUsuario?usuario=${u.usuario}"><img src="img/icono_modificar.png" alt="" height="25px" width="25px"></a>
+                            <a href="ModificarUsuario?usuario=${u.usuario}"><img src="img/icono_modificar.png" alt="Modificar usuario" height="25px" width="25px"></a>
                         </td>
                         <td class="eliminar">
-                            <a href="EliminarUsuario?usuario=${u.usuario}"><img src="img/icono_eliminar.png" alt="" height="25px" width="25px"></a>
+                            <a href="EliminarUsuario?usuario=${u.usuario}"><img src="img/icono_eliminar.png" alt="Eliminar usuario" height="25px" width="25px"></a>
                         </td>
                     </tr>
                     </c:forEach>

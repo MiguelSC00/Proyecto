@@ -5,8 +5,10 @@
  */
 package controladores;
 
+import dao.DaoUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,15 +39,41 @@ public class SuscribirCulturismo extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         Usuario u = (Usuario)sesion.getAttribute("usuario");
-        String error = "";
+        String error= "";
+        
+        String tarjeta = request.getParameter("tarjeta");
+        String fecha = request.getParameter("fechaCaducidad");
+        String cvv = request.getParameter("cvv");
+        
+        
         
         if (u == null) {
             response.sendRedirect("iniciarSesion.jsp");
         } else {
-            if (request.getParameter("submit") == null) {
+            
+            if (!tarjeta.isEmpty() && !fecha.isEmpty() && !cvv.isEmpty() && tarjeta != null
+                    && fecha != null && cvv != null) {
+                
+                try {
+                    DaoUsuario.suscribir("Culturismo", u);
+                } catch (SQLException e) {
+                    
+                    System.out.println(e.getErrorCode());
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    
+                }
+                
+            } else {
+             
+                error = "Rellene todos los campos";
                 request.setAttribute("error", error);
-                getServletContext().getRequestDispatcher("/formularioSuscripcion.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/formularioSuscripcionCulturismo.jsp").forward(request, response);
+                
             }
+                
+                
+                
         }
         
         

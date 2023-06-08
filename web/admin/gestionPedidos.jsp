@@ -10,27 +10,78 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/stylesGestionUsuarios.css">
         <title>JSP Page</title>
     </head>
     <body>
         
-        <c:choose>
-            <c:when test="${empty usuario}">
-                <jsp:include page="header.jsp"/>
-            </c:when>
-            <c:otherwise>
-                <c:choose>
-                    <c:when test="${usuario.getRol().equals('Administrador')}">
-                        <jsp:include page="headerAdmin.jsp"/>
-                    </c:when>
-                    <c:when test="${usuario.getRol().equals('Entrenador')}">
-                        <jsp:include page="headerEntrenador.jsp"/>
-                    </c:when>
-                    <c:otherwise>
-                        <jsp:include page="headerCliente.jsp"/>
-                    </c:otherwise>
-                </c:choose>
-            </c:otherwise>
-        </c:choose>
+    <header>
+        <jsp:include page="../headerAdmin.jsp"/>
+           
+        <nav class="nav-admin">
+            <div>
+                <h3>Panel de control</h3>
+            </div>
+
+            <div>
+                <ul class="menu-admin">
+                    <li><a href="MostrarUsuarios">Gestionar usuarios</a></li>
+                    <li><a href="MostrarProductos?target=administrar">Gestionar productos</a></li>
+                    <li class="actual"><a href="MostrarPedidos">Gestionar pedidos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+        
+    <section>
+        <!--<!-- comment 
+        <div class="div-botones">
+            <button onclick="location.href='CrearProducto'">Añadir producto</button>
+            
+            <button onclick="location.href='CargarPanel'">Volver</button>
+        </div>-->
+
+        <div>
+            <table>
+                <thead>
+                    <th>Código</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                    <th>Precio</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                </thead>
+                <tbody>
+                    <c:forEach items="${pedidos}" var="p">
+                    <tr>
+                        <td><c:out value="${p.codigo}"/></td>
+                        <td><c:out value="${p.usuario}"/></td>
+                        <td><c:out value="${p.fecha}"/></td>
+                        <td><c:out value="${p.precio}"/></td>
+                        <td><c:out value="${p.getDireccion()}"/></td>
+                        <td><c:out value="${p.estado}"/></td>
+                        <td class="modificar">
+                            <a href="ModificarPedido?codigo=${p.codigo}"><img src="img/icono_modificar.png" alt="" height="25px" width="25px"></a>
+                        </td>
+                        <td class="eliminar">
+                            <a href="EliminarPedido?codigo=${p.codigo}"><img src="img/icono_eliminar.png" alt="" height="25px" width="25px"></a>
+                        </td>
+                        <td class="enviar">
+                            <a href="DetallesPedido?codigo=${p.codigo}"><img src="img/iconos/ver-detalles.png" alt="" height="25px" width="25px"></a>
+                        </td>
+                        <td class="enviar">
+                            <a href="EnviarPedido?codigo=${p.codigo}"><img src="img/iconos/entrega.png" alt="" height="25px" width="25px"></a>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+        
+        
+        
     </body>
 </html>

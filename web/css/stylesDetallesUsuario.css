@@ -1,0 +1,100 @@
+section {
+    margin: 100px auto;
+    width: 60%;
+}
+
+.detalles {
+    padding: 20px;
+    border: solid 1px gray;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.detalles>div:last-of-type {
+    margin-left: 40px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td, table th {
+    padding: .7rem 1rem;
+    border: 1px solid black;
+    max-width: fit-content;
+}
+
+td {
+    text-align: center;
+}
+
+table thead{
+    background-color: rgb(150, 0, 0);
+    color: rgb(250, 234, 234);
+    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.adjuntar {
+    border: none;
+    background-color: white;
+    padding: 0px 0px 0px 10px;
+}
+
+.contenedor-tablas {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tipo {
+    color: gray;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+
+
+@media (max-width: 1300px) {
+
+    section {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+    }
+
+    table td, table th {
+        border: none;
+        padding: 0.5rem 1rem;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table td[data-titulo] {
+        display: flex;
+    }
+
+    table td[data-titulo]::before {
+        content: attr(data-titulo);
+        width: 80px;
+        font-weight: bolder;
+    }
+
+}
+
+

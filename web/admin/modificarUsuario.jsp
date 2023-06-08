@@ -28,9 +28,9 @@
 
                 <div>
                     <ul class="menu-admin">
-                        <li class="actual"><a href="">Gestionar usuarios</a></li>
-                        <li><a href="">Gestionar productos</a></li>
-                        <li><a href="">Gestionar pedidos</a></li>
+                        <li class="actual"><a href="MostrarUsuarios">Gestionar usuarios</a></li>
+                        <li><a href="MostrarProductos?target=administrar">Gestionar productos</a></li>
+                        <li><a href="MostrarPedidos">Gestionar pedidos</a></li>
                     </ul>
                 </div>
             </nav>

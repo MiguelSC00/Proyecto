@@ -100,7 +100,12 @@ button {
     border: none;
 }
 
-.modificar img, .eliminar img {
+.enviar {
+    text-align: center;
+    border: none;
+}
+
+.modificar img, .eliminar img, .enviar img {
     cursor: pointer;
 }
 

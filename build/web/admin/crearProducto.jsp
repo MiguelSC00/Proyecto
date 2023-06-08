@@ -30,8 +30,8 @@
                     <div>
                         <ul class="menu-admin">
                             <li><a href="MostrarUsuarios">Gestionar usuarios</a></li>
-                            <li class="actual"><a href="MostrarProductos">Gestionar productos</a></li>
-                            <li><a href="">Gestionar pedidos</a></li>
+                            <li class="actual"><a href="MostrarProductos?target=administrar">Gestionar productos</a></li>
+                            <li><a href="MostrarPedidos">Gestionar pedidos</a></li>
                         </ul>
                     </div>
                 </nav>

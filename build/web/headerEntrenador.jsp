@@ -10,8 +10,9 @@
                 <li><a href="index.jsp">Inicio</a></li>
                 <li><a href="nosotros.jsp">Nosotros</a></li>
                 <li><a href="asesorias.jsp">Asesorías</a></li>
-                <li><a href="tienda.jsp">Tienda</a></li>
-                <li><a href="">Alumnos</a></li>
+                <li><a href="MostrarProductos?target=tienda">Tienda</a></li>
+                <li><a href="cesta.jsp"><img src="img/cesta.png" width="22px" height="22px"></img>(${cesta.size()})</a></li>
+                <li><a href="MostrarUsuariosSuscritos">Alumnos</a></li>
                 <li><a href="perfil.jsp">Mi cuenta</a></li>
                 <li><a href="CerrarSesion"><img src="img/iconos/icono_cerrar_sesion.png" width="22px" height="22px"/></a></li>
             </ul>

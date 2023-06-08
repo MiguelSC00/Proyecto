@@ -40,7 +40,7 @@ public class EliminarProducto extends HttpServlet {
         
         try {
             DaoProducto.eliminarProducto(codigo);
-            response.sendRedirect("MostrarProductos");
+            response.sendRedirect("MostrarProductos?target=administrar");
         } catch (SQLException e) {
             e.getErrorCode();
         }

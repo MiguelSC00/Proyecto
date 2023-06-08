@@ -84,3 +84,7 @@
 .pagar form:last-of-type input{
     background-color: grey;
 }
+
+span {
+    color: green;
+}

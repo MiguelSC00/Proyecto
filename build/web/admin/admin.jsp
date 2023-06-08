@@ -12,18 +12,19 @@
 <body>
     <header>
         
-        <nav class="fixed-nav">
+    <nav class="fixed-nav">
             <img src="img/barbell.webp" alt="" class="icono-mancuerna">
             <ul class="menu">
                 <li><a href="index.jsp">Inicio</a></li>
                 <li><a href="nosotros.jsp">Nosotros</a></li>
                 <li><a href="asesorias.jsp">Asesorías</a></li>
-                <li><a href="tienda.jsp">Tienda</a></li>
-                <li><a href="">Panel de control</a></li>
+                <li><a href="MostrarProductos?target=tienda">Tienda</a></li>
+                <li><a href="cesta.jsp"><img src="img/cesta.png" width="22px" height="22px"></img>(${cesta.size()})</a></li>
+                <li><a href="CargarPanel">Panel de control</a></li>
                 <li><a href="perfil.jsp">Mi cuenta</a></li>
                 <li><a href="CerrarSesion"><img src="img/iconos/icono_cerrar_sesion.png" width="22px" height="22px"/></a></li>
             </ul>
-        </nav>
+    </nav>
 
         <nav class="nav-admin">
             <div>
@@ -34,7 +35,7 @@
                 <ul class="menu-admin">
                     <li><a href="MostrarUsuarios">Gestionar usuarios</a></li>
                     <li><a href="MostrarProductos?target=administrar">Gestionar productos</a></li>
-                    <li><a href="">Gestionar pedidos</a></li>
+                    <li><a href="MostrarPedidos">Gestionar pedidos</a></li>
                 </ul>
             </div>
         </nav>
@@ -68,13 +69,13 @@
                             </div>
                         </td>    
                     </tr>
-                    <tr>
+                    <tr onclick="location.href='MostrarPedidos'">
                         <td>
                             <div>
                                 <img src="img/iconos/pedido.png" alt="" height="24px" width="24px"> Pedidos 
                             </div>
                             <div>  
-                                <span>4</span>
+                                <span>${pedidosAceptados}</span>
                             </div>
                         </td>    
                     </tr>
@@ -107,7 +108,7 @@
                         </td>
                         <td>
                             <div>
-                                <img src="img/iconos/pedido.png" alt="" height="64px" width="64px"><span>&nbsp;8</span>
+                                <img src="img/iconos/pedido.png" alt="" height="64px" width="64px"><span>&nbsp;${totalPedidos}</span>
                             </div>
                             <div>
                                 <p>Pedidos</p>
@@ -122,6 +123,12 @@
                     <th>Pedidos pendientes</th>
                 </thead>
                 <tbody>
+                    <c:if test="${empty pedidosPendientes}">
+                        <tr>
+                            <td><p>No hay ningún pedido pendiente de enviar.</p></td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${!empty pedidosPendientes}">
                     <td class="td-flex">
                         <table class="tabla-secundaria">
                             <thead>
@@ -131,34 +138,18 @@
                                 <th>Dirección</th>
                             </thead>
                             <tbody>
+                                <c:forEach items="${pedidosPendientes}" var="p">
                                 <tr>
-                                    <td>12345</td>
-                                    <td>MiguelSC00</td>
-                                    <td>30/05/2022</td>
-                                    <td>Calle Azahar Nº16</td>
+                                    <td><c:out value="${p.getCodigo()}"/></td>
+                                    <td><c:out value="${p.getUsuario()}"/></td>
+                                    <td><c:out value="${p.getFecha()}"/></td>
+                                    <td><c:out value="${p.getDireccion()}"/></td>
                                 </tr>
-                                <tr>
-                                    <td>12345</td>
-                                    <td>MiguelSC00</td>
-                                    <td>30/05/2022</td>
-                                    <td>Calle Azahar Nº16</td>
-                                </tr>
-                                <tr>
-                                    <td>12345</td>
-                                    <td>MiguelSC00</td>
-                                    <td>30/05/2022</td>
-                                    <td>Calle Azahar Nº16</td>
-                                </tr>
-                                <tr>
-                                    <td>12345</td>
-                                    <td>MiguelSC00</td>
-                                    <td>30/05/2022</td>
-                                    <td>Calle Azahar Nº16</td>
-                                </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </td>
-                    
+                    </c:if>
                 </tbody>
             </table>
         </div>

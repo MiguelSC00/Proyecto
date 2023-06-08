@@ -5,11 +5,14 @@
  */
 package controladores;
 
+import dao.DaoPedido;
 import dao.DaoProducto;
 import dao.DaoUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Pedido;
 
 /**
  *
@@ -40,19 +44,35 @@ public class CargarPanel extends HttpServlet {
         
         int totalUsuarios = 0;
         int totalProductos = 0;
+        int totalPedidos = 0;
+        
         int productosSinStock = 0;
+        int pedidosAceptados = 0;
+        
+        List<Pedido> pedidosPendientes = null;
         
         try {
+            
             totalUsuarios = DaoUsuario.totalUsuarios();
             totalProductos = DaoProducto.totalProductos();
+            totalPedidos = DaoPedido.totalPedidos();
+            
             productosSinStock = DaoProducto.productosSinStock();
+            pedidosAceptados = DaoPedido.pedidosAceptados();
+            
+            pedidosPendientes = DaoPedido.pedidosPendientes();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(CargarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getStackTrace());
+            System.out.println(ex.getMessage());
         }
         
         request.setAttribute("totalUsuarios", totalUsuarios);
         request.setAttribute("totalProductos", totalProductos);
+        request.setAttribute("totalPedidos", totalPedidos);
         request.setAttribute("productosSinStock", productosSinStock);
+        request.setAttribute("pedidosAceptados", pedidosAceptados);
+        request.setAttribute("pedidosPendientes", pedidosPendientes);
         request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
         
         

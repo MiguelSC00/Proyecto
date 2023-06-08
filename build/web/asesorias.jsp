@@ -52,7 +52,12 @@
                 </div>
             </div>
             <div>
-                <button class="boton-contratar" onclick="location.href='SuscribirCulturismo'">CONTRATAR</button>
+                <c:if test="${empty usuario}">
+                    <button class="boton-contratar" onclick="location.href='iniciarSesion.jsp'">CONTRATAR</button>
+                </c:if>
+                <c:if test="${!empty usuario}">
+                    <button class="boton-contratar" onclick="location.href='formularioSuscripcionCulturismo.jsp'">CONTRATAR</button>
+                </c:if>
             </div>
         </div>
 
@@ -72,7 +77,12 @@
                 </div>
             </div>
             <div>
-                <button class="boton-contratar" onclick="location.href='SuscribirPowerlifting'">CONTRATAR</button>
+                <c:if test="${empty usuario}">
+                    <button class="boton-contratar" onclick="location.href='iniciarSesion.jsp'">CONTRATAR</button>
+                </c:if>
+                <c:if test="${!empty usuario}">
+                    <button class="boton-contratar" onclick="location.href='formularioSuscripcionPowerlifting.jsp'">CONTRATAR</button>
+                </c:if>
             </div>
         </div>
     </section>

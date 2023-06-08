@@ -1,0 +1,45 @@
+section {
+    width: 35%;
+    margin: 150px auto;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    padding: 2rem;
+    border-right: 1px gray solid;
+}
+
+.cambiar {
+    padding: 2rem;
+}
+
+.cambiar>div {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px gray solid;
+}
+
+.ultimo {
+
+    border-bottom: none;
+}
+
+.usuario {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.nombreCompleto {
+    color: grey;
+}
+
+.error {
+    color: red;
+}
+
+.title {
+    font-size: 2rem;
+    text-decoration: underline;
+}

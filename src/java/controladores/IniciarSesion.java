@@ -66,6 +66,9 @@ public class IniciarSesion extends HttpServlet {
                     List<Producto> c = new ArrayList();
                     sesion.setAttribute("cesta", c);
                     
+                    List<Integer> cantidades = new ArrayList();
+                    sesion.setAttribute("cantidades", cantidades);
+                    
                     if (u.getRol().equals("Administrador")) { //Si el usuario es admin
                         response.sendRedirect("CargarPanel");
                     } else { //Si el usuario no es admin

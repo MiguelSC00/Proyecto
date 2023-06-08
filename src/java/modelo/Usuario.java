@@ -21,9 +21,12 @@ public class Usuario {
     private String email;
     private String telefono;
     private String rol;
+    private String suscripcion;
 
     //Constructor
-    public Usuario(String usuario, String password, String nombre, String apellidos, String email, String telefono, String rol) {
+    
+    
+    public Usuario(String usuario, String password, String nombre, String apellidos, String email, String telefono, String rol, String suscripcion) {
         this.usuario = usuario;
         this.password = password;
         this.nombre = nombre;
@@ -31,6 +34,7 @@ public class Usuario {
         this.email = email;
         this.telefono = telefono;
         this.rol = rol;
+        this.suscripcion = suscripcion;
     }
     
     //Getters y Setters
@@ -90,6 +94,16 @@ public class Usuario {
     public void setAdministrador(String rol) {
         this.rol = rol;
     }
+
+    public String getSuscripcion() {
+        return suscripcion;
+    }
+
+    public void setSuscripcion(String suscripcion) {
+        this.suscripcion = suscripcion;
+    }
+    
+    
 
     @Override
     public int hashCode() {

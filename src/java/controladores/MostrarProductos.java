@@ -46,7 +46,7 @@ public class MostrarProductos extends HttpServlet {
             System.err.println(e.getMessage());
         }
         
-        if (target.equals("tienda")) {
+        if  (target.equals("tienda")) {
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("/tienda.jsp").forward(request, response);
         } else {

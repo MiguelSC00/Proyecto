@@ -56,8 +56,9 @@ public class ModificarUsuario extends HttpServlet {
             String email = request.getParameter("email");
             String telefono = request.getParameter("telefono");
             String rol = request.getParameter("rol");
+            String asesoria = "";
             
-            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol);
+            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, asesoria);
             
             try {
                 DaoUsuario.modificarUsuario(u);

@@ -1,0 +1,82 @@
+table {
+    border-collapse: collapse;
+}
+
+section {
+    margin: 120px auto;
+    width: 80%;
+
+    text-align: center;
+}
+
+.contenido {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.control a {
+    text-decoration: none;
+    color: black;
+}
+
+.control {
+    padding-right: 50px;
+    border-right: 1px solid gray;
+}
+
+table td, table th {
+    padding: .7rem 1rem;
+    border: 1px solid black;
+    max-width: fit-content;
+}
+
+table thead{
+    background-color: rgb(150, 0, 0);
+    color: rgb(250, 234, 234);
+    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+table tr td:nth-child(8), table tr td:nth-child(7) {
+    border: none;
+}
+
+@media (max-width: 1300px) {
+
+    section {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+    }
+
+    table td, table th {
+        border: none;
+        padding: 0.5rem 1rem;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table td[data-titulo] {
+        display: flex;
+    }
+
+    table td[data-titulo]::before {
+        content: attr(data-titulo);
+        width: 80px;
+        font-weight: bolder;
+    }
+
+}
+

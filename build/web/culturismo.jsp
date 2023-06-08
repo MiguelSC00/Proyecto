@@ -51,7 +51,12 @@
                     <p>59,99$</p>
                 </div>
                 <div>
-                    <button class="boton-contratar">CONTRATAR</button>
+                    <c:if test="${empty usuario}">
+                        <button class="boton-contratar" onclick="location.href='iniciarSesion.jsp'">CONTRATAR</button>
+                    </c:if>
+                    <c:if test="${!empty usuario}">
+                        <button class="boton-contratar" onclick="location.href='formularioSuscripcionCulturismo.jsp'">CONTRATAR</button>
+                    </c:if>
                 </div>
             </div>
         </div>
