@@ -61,7 +61,7 @@ table thead{
 @media (max-width: 1300px) {
 
     section {
-        margin: 0 auto;
+        margin: 100px auto;
         width: 90%;
     }
 
@@ -81,7 +81,7 @@ table thead{
         padding: 0.5rem 1rem;
     }
 
-    table thead {
+    .oculta {
         display: none;
     }
 
@@ -97,4 +97,14 @@ table thead{
 
 }
 
+@media (max-width: 650px) {
 
+    section {
+        font-size: 1.3rem;
+    }
+    
+    .detalles {
+        flex-direction: column;
+    }
+    
+}

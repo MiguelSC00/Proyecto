@@ -58,7 +58,7 @@
 
                     <div>
                         <label for="numero">Número: </label>
-                        <input type="number" name="numero" id="numero">
+                        <input type="number" name="numero" id="numero" required="">
                     </div>
                 </fieldset>
 

@@ -90,12 +90,12 @@
       
               <div class="mb-3">
                 <label for="passwordR" class="form-label">Contraseña</label>
-                <input type="passwordR" class="form-control" name="passwordR" id="passwordR">
+                <input type="password" class="form-control" name="passwordR" id="passwordR">
               </div>
                 
               <div class="mb-3">
                 <label for="passwordR2" class="form-label">Repite la contraseña</label>
-                <input type="passwordR" class="form-control" name="passwordR2" id="passwordR2">
+                <input type="password" class="form-control" name="passwordR2" id="passwordR2">
               </div>
     
               <div class="mb-3">

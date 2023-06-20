@@ -36,7 +36,7 @@
 }
 
 .producto form span {
-    color: rgb(197, 29, 29);
+    color: green;
     font-weight: bold;
     font-size: 1.5rem;
 }
@@ -87,4 +87,43 @@
 
 span {
     color: green;
+}
+
+@media (max-width: 970px) {
+    
+    .seccion-productos {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .pagar {
+        width: 90vw;
+    }
+    
+    .productos {
+        width: 90vw;
+    }
+    
+}
+
+@media (max-width: 670px) {
+    
+    .productos img {
+        width: 150px;
+        height: auto;
+    }
+    
+    .producto form input {
+        font-size: 1rem;
+        background-color: rgb(197, 29, 29);
+        padding: .5rem 1.3rem;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 10px;
+        width: 90%;
+        cursor: pointer;
+    }
+    
+    
+    
 }

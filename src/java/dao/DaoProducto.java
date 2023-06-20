@@ -147,6 +147,7 @@ public class DaoProducto {
             n = rs.getInt(1);
         }
         
+        
         return n;
         
     }
@@ -160,7 +161,8 @@ public class DaoProducto {
         
         consulta.setInt(1, n);
         consulta.setInt(2, p.getCodigo());
-
+        consulta.execute(); 
+        
         desconectarBD(con);
         
     }

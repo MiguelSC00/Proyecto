@@ -1,6 +1,6 @@
 section {
-    width: 35%;
-    margin: 150px auto;
+    width:35%;
+    margin: 100px auto;
     
     display: flex;
     justify-content: space-between;
@@ -42,4 +42,33 @@ section {
 .title {
     font-size: 2rem;
     text-decoration: underline;
+}
+
+@media (max-width: 1400px) {
+    
+    section {
+        width: 50%;
+    }
+    
+}
+
+@media (max-width: 1150px) {
+    
+    section {
+        width: 60%;
+    }
+    
+}
+
+@media (max-width: 850px) {
+    
+    section {
+        flex-direction: column;
+    }
+    
+    .info {
+    border-right: none;
+    border-bottom:1px gray solid;
+}
+    
 }

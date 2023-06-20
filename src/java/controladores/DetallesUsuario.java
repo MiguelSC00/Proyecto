@@ -5,15 +5,19 @@
  */
 package controladores;
 
+import dao.DaoPdf;
 import dao.DaoUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Pdf;
 import modelo.Usuario;
 
 /**
@@ -39,14 +43,25 @@ public class DetallesUsuario extends HttpServlet {
         String usuario = request.getParameter("usuario");
         
         Usuario u = null;
+        List<Pdf> reportes = new ArrayList();
+        List<Pdf> planes = new ArrayList();
         
         try {
             u = DaoUsuario.buscarUsuario(usuario);
-        } catch (SQLException e) {
+            System.out.println(u.getUsuario() +"ararar");
+            planes = DaoPdf.getEntrenamientos(u);
+            reportes = DaoPdf.getReportes(u);
             
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getStackTrace());
         }
         
+        System.out.println("que pasoo");
+        
         request.setAttribute("usu", u);
+        request.setAttribute("planes", planes);
+        request.setAttribute("reportes", reportes);
         request.getRequestDispatcher("/entrenador/detallesAlumno.jsp").forward(request, response);
         
     }

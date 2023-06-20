@@ -73,30 +73,56 @@ public class CrearPedido extends HttpServlet {
             
             Pedido ultimo = null;
             
-            try {
-                
-                DaoPedido.crearPedido(p);
-                
-                ultimo = DaoPedido.buscarUltimoPedido();
-                
-                int contador = 0;
-                
-                for (Producto pr : cesta) {
+            boolean sinStock = false;
+            
+            for (Producto pro : cesta) {
+            
+                if (pro.getStock() < cantidades.get(cesta.indexOf(pro))) {
                     
-                        DaoProducto.restarStock(pr, cantidades.get(contador));
-                        ListaItems l = new ListaItems(ultimo.getCodigo(), pr.getCodigo(), cantidades.get(contador));
-                        DaoListaItems.crearListaItems(l);
-                        
-                        
-                        contador++;
-                   
+                    error = "Solo quedan " + pro.getStock() + " unidades de " + pro.getNombre();
+                    request.setAttribute("error", error);
+                    sinStock = true;
+                    
                 }
                 
-            } catch (SQLException e) {
-                System.out.println(e.getErrorCode());
-                System.out.println(e.getMessage());
-                System.out.println(e.getStackTrace());
+                
             }
+            
+            if (!sinStock) {
+                try {
+                
+                    DaoPedido.crearPedido(p);
+
+                    ultimo = DaoPedido.buscarUltimoPedido();
+
+                    int contador = 0;
+
+                    for (Producto pr : cesta) {
+
+                            DaoProducto.restarStock(pr, cantidades.get(contador));
+                            ListaItems l = new ListaItems(ultimo.getCodigo(), pr.getCodigo(), cantidades.get(contador));
+                            DaoListaItems.crearListaItems(l);
+
+                            contador++;
+
+                    }
+                    
+                    cesta.clear();
+                    sesion.setAttribute("cesta", cesta);
+                    response.sendRedirect("index.jsp");
+
+                } catch (SQLException e) {
+                    System.out.println(e.getErrorCode());
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                }
+            } else {
+                
+                getServletContext().getRequestDispatcher("/cesta.jsp").forward(request, response);
+                
+            }
+            
+            
             
         } else {
             
@@ -106,9 +132,8 @@ public class CrearPedido extends HttpServlet {
             
         }
         
-        cesta.clear();
-        sesion.setAttribute("cesta", cesta);
-        response.sendRedirect("index.jsp");
+        
+        
         
     }
 

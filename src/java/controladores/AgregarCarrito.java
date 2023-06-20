@@ -55,12 +55,12 @@ public class AgregarCarrito extends HttpServlet {
                 
                 producto = DaoProducto.buscarProducto(codigo);
                 
-                if (producto.getStock() == 0) { //Si ya no queda stock del producto, no se puede añadir a la cesta
-                    
-                    request.setAttribute("error", "No queda stock de " + producto.getNombre());
-                    getServletContext().getRequestDispatcher("/cesta.jsp").forward(request, response);
-                    
-                } else {
+//                if (producto.getStock() == 0) { //Si ya no queda stock del producto, no se puede añadir a la cesta
+//                    
+//                    request.setAttribute("error", "No queda stock de " + producto.getNombre());
+//                    getServletContext().getRequestDispatcher("/cesta.jsp").forward(request, response);
+//                    
+//                } else {
                     
                     if (cesta.isEmpty()) {
                 
@@ -88,7 +88,7 @@ public class AgregarCarrito extends HttpServlet {
                     sesion.setAttribute("cesta", cesta);
                     response.sendRedirect("MostrarProductos?target=tienda");
                     
-                }
+                //}
                 
                 
                 

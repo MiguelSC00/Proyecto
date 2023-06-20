@@ -1,7 +1,14 @@
 package modelo;
 
 
+import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,9 +29,22 @@ public class Usuario {
     private String telefono;
     private String rol;
     private String suscripcion;
+    private Timestamp fechaSuscripcion;
 
     //Constructor
     
+    
+    public Usuario(String usuario, String password, String nombre, String apellidos, String email, String telefono, String rol, String suscripcion, Timestamp fechaSuscripcion) {
+        this.usuario = usuario;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.telefono = telefono;
+        this.rol = rol;
+        this.suscripcion = suscripcion;
+        this.fechaSuscripcion = fechaSuscripcion;
+    }
     
     public Usuario(String usuario, String password, String nombre, String apellidos, String email, String telefono, String rol, String suscripcion) {
         this.usuario = usuario;
@@ -35,6 +55,16 @@ public class Usuario {
         this.telefono = telefono;
         this.rol = rol;
         this.suscripcion = suscripcion;
+    }
+    
+    public Usuario(String usuario, String password, String nombre, String apellidos, String email, String telefono, String rol) {
+        this.usuario = usuario;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.telefono = telefono;
+        this.rol = rol;
     }
     
     //Getters y Setters
@@ -102,6 +132,16 @@ public class Usuario {
     public void setSuscripcion(String suscripcion) {
         this.suscripcion = suscripcion;
     }
+
+    public Timestamp getFechaSuscripcion() {
+        return fechaSuscripcion;
+    }
+
+    public void setFechaSuscripcion(Timestamp fechaSuscripcion) {
+        this.fechaSuscripcion = fechaSuscripcion;
+    }
+    
+    
     
     
 
@@ -128,6 +168,36 @@ public class Usuario {
             return false;
         }
         return true;
+    }
+    
+        public void setEnviarEmail(Email email, String password) throws Exception {
+        Properties p = new Properties();
+// Servidor smtp de correo
+        p.setProperty("mail.smtp.host", "smtp.gmail.com");
+// Usar TLS
+        p.setProperty("mail.smtp.starttls.enable", "true");
+// puerto del servidor smtp
+        p.setProperty("mail.smtp.port", "587");
+// Usuario smtp
+        p.setProperty("mail.smtp.user", email.getFrom());
+// Autenticación requerida
+        p.setProperty("mail.smtp.auth", "true");
+// Obtenemos la sesión
+        Session sesion = Session.getDefaultInstance(p);
+        sesion.setDebug(false);
+// Creamos el mensaje
+        MimeMessage mensaje = new MimeMessage(sesion);
+// Y establecemos sus propiedades
+
+        mensaje.setFrom(new InternetAddress(email.getFrom()));
+        mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
+        mensaje.setSubject(email.getSubject());
+        mensaje.setText(email.getText());
+// Enviamos el mensaje
+        Transport t = sesion.getTransport("smtp");
+// Para conectarnos usamos usuario y password
+        t.connect(email.getFrom(), password);
+        t.sendMessage(mensaje, mensaje.getAllRecipients());
     }
 
     

@@ -12,12 +12,25 @@
 <body>
     <header>
         
+    <script src="scripts/script_menu.js"></script>
     <nav class="fixed-nav">
             <img src="img/barbell.webp" alt="" class="icono-mancuerna">
             <ul class="menu">
                 <li><a href="index.jsp">Inicio</a></li>
                 <li><a href="nosotros.jsp">Nosotros</a></li>
-                <li><a href="asesorias.jsp">Asesorías</a></li>
+                <li><a href="MostrarProductos?target=tienda">Tienda</a></li>
+                <li><a href="cesta.jsp"><img src="img/cesta.png" width="22px" height="22px"></img>(${cesta.size()})</a></li>
+                <li><a href="CargarPanel">Panel de control</a></li>
+                <li><a href="perfil.jsp">Mi cuenta</a></li>
+                <li><a href="CerrarSesion"><img src="img/iconos/icono_cerrar_sesion.png" width="22px" height="22px"/></a></li>
+            </ul>
+            <img src="img/lista.png" onclick="ocultar_mostrar()" alt="" width="40px" class="menu-burguer" id="menu_burguer">
+    </nav>
+             
+    <nav class="nav-responsive" id="nav-responsive" style="display: none;">
+            <ul class="menu-responsive">
+                <li><a href="index.jsp">Inicio</a></li>
+                <li><a href="nosotros.jsp">Nosotros</a></li>
                 <li><a href="MostrarProductos?target=tienda">Tienda</a></li>
                 <li><a href="cesta.jsp"><img src="img/cesta.png" width="22px" height="22px"></img>(${cesta.size()})</a></li>
                 <li><a href="CargarPanel">Panel de control</a></li>
@@ -54,9 +67,7 @@
                             <div>
                                 <img src="img/iconos/usuario.png" alt="" height="24px" width="24px"> Usuarios 
                             </div>
-                            <div>
-                                <span>20</span>
-                            </div>
+                            
                         </td>
                     </tr>
                     <tr onclick="location.href='MostrarProductos?target=administrar'">

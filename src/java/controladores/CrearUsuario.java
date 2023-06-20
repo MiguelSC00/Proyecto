@@ -9,6 +9,8 @@ import dao.DaoUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,6 +59,13 @@ public class CrearUsuario extends HttpServlet {
             String telefono = request.getParameter("telefonoR");
             String asesoria = "";
             
+            Usuario existeEmail = null;
+            try {
+                existeEmail = DaoUsuario.buscarEmail(email);
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             //Si ninguna está vacía
             if (nombre != null && apellidos != null && usuario != null && password1 != null && password2 != null && email != null && telefono != null
             && !nombre.isEmpty() && !apellidos.isEmpty() && !usuario.isEmpty() && !password1.isEmpty() && !password2.isEmpty() && !email.isEmpty() && !telefono.isEmpty()) {
@@ -72,26 +81,38 @@ public class CrearUsuario extends HttpServlet {
                 
                 if (u == null) { //Si el usuario es null, no existe
                     
-                    if (password1.equals(password2)) { //Si las dos contraseñas coinciden
+                    if (password1.equals(password2)) {
+                        //Si las dos contraseñas coinciden
                         
-                        //Si el número de teléfono tiene el formato correcto
-                        if (telefono.length() == 9 && telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
-                            
-                            //Creamos un objeto usuario con la información del formulario
-                            u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, "Cliente", asesoria);
-                            try { //Lo introducimos en la base de datos
-                                DaoUsuario.crearUsuario(u);
-                                response.sendRedirect("iniciarSesion.jsp");
-                            } catch (SQLException ex) {
-                                System.err.println(ex.getClass().getName() + ":" + ex.getMessage());
-                                return;
+                        if (existeEmail == null) {
+                            //Si el número de teléfono tiene el formato correcto
+                            if (telefono.length() == 9 && telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
+
+                                //Creamos un objeto usuario con la información del formulario
+                                u = new Usuario(usuario, password1, nombre, apellidos, email, telefono, "Cliente", asesoria);
+                                try { //Lo introducimos en la base de datos
+                                    DaoUsuario.crearUsuario(u);
+                                    response.sendRedirect("iniciarSesion.jsp");
+                                } catch (SQLException ex) {
+                                    System.err.println(ex.getClass().getName() + ":" + ex.getMessage());
+                                    return;
+                                }
+
+                            } else { //Si el número de teléfono no es válido
+                                error = "Introduce un número válido de 9 dígitos.";
+                                request.setAttribute("errorRegistro", error);
+                                getServletContext().getRequestDispatcher("/iniciarSesion.jsp").forward(request, response);
                             }
+                        } else {
                             
-                        } else { //Si el número de teléfono no es válido
-                            error = "Introduce un número válido de 9 dígitos.";
-                            request.setAttribute("errorRegistro", error);
-                            getServletContext().getRequestDispatcher("/iniciarSesion.jsp").forward(request, response);
+                            error = "Este correo ya pertenece a un usuario";
+                        request.setAttribute("errorRegistro", error);
+                        getServletContext().getRequestDispatcher("/iniciarSesion.jsp").forward(request, response);
+                            
                         }
+                        
+                        
+                        
                         
                     } else { //Si las dos contraseñas no coinciden
                         error = "Las contraseñas no coinciden.";

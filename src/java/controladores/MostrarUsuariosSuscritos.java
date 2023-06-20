@@ -37,13 +37,45 @@ public class MostrarUsuariosSuscritos extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String filtro = request.getParameter("filtro");
+        
         List<Usuario> usuarios = null;
         
-        try {
-            usuarios = DaoUsuario.consultarUsuariosSuscritos();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        if (filtro.equals("todos")) {
+            
+            System.out.println(filtro);
+            
+            try {
+                usuarios = DaoUsuario.consultarUsuariosSuscritos();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+            
+        } else if (filtro.equals("culturismo")){
+            
+            System.out.println(filtro);
+            
+            try {
+                usuarios = DaoUsuario.filtrarCulturismo();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+            
+        } else {
+            
+            System.out.println("power");
+            
+            try {
+                usuarios = DaoUsuario.filtrarPowerlifting();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+            
         }
+        
+        
+        
+        
         
         request.setAttribute("usuarios", usuarios);
         request.getRequestDispatcher("/entrenador/alumnos.jsp").forward(request, response);

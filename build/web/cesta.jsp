@@ -13,11 +13,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mi cesta</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
         <link rel="stylesheet" type="text/css" href="css/stylesCesta.css"/>
     </head>
     <body>
+        
+        
         
         <%
             double precioTotal = 0;
@@ -77,11 +81,16 @@
                             </form> 
                         </div>
                     </c:forEach>
-                </c:if> 
+                </c:if>
+                <c:if test="${empty cesta}">
+                    <h1>No hay nada en la cesta...</h1>
+                </c:if>
             </div>
 
             <div class="pagar">
                 <h2>Precio Total: ${precioTotal}€</h2>
+                
+                <p stlyle="color: red">${error}</p>
 
                 <form action="formularioPedido.jsp" method="post">
                     <input type="submit" name="pagar" value="Pagar">

@@ -56,7 +56,8 @@
                     
                     <div>
                         <label for="usuario">Usuario</label>
-                        <input type="text" name="usuario" id="usuario" value="${usuarioModificar.usuario}"/>
+                        <input type="text" name="usuarioD" id="usuarioD" value="${usuarioModificar.usuario}" disabled/>
+                        <input type="hidden" name="usuario" id="usuario" value="${usuarioModificar.usuario}"º/>
                     </div>
                     
                     <div>
@@ -82,6 +83,10 @@
                             <option value="Administrador" ${usuarioModificar.rol.equals("Administrador")?"selected":""}>Administrador</option>
                         </select>
                     </div>
+                        
+                        <div>
+                            <p>${error}</p>
+                        </div> 
                        
                         <div>
                             <input type="submit" class="input" name="modificar" value="Modificar"/>

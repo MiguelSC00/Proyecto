@@ -39,15 +39,27 @@ public class EliminarProductoCesta extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         List<Producto> cesta = (ArrayList)sesion.getAttribute("cesta");
+        List<Integer> cantidades = (ArrayList)sesion.getAttribute("cantidades");
         
         int indice = Integer.parseInt(request.getParameter("indiceProducto"));
         
-        cesta.remove(indice);
+        if (cantidades.get(indice) == 1) {
+            
+            cesta.remove(indice);
+            cantidades.remove(indice);
+            
+            
+        } else {
+            
+            cantidades.set(indice, (cantidades.get(indice)-1));
+            
+        }
 
         
         System.out.println(request.getParameter("indiceProducto"));
         
         sesion.setAttribute("cesta", cesta);
+        sesion.setAttribute("cantidades", cantidades);
         
         response.sendRedirect("cesta.jsp");
         

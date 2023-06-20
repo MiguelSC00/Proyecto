@@ -15,14 +15,14 @@ import java.sql.Timestamp;
 public class Pdf {
     
     /*Todo los atributos*/
-    private int codigopdf;
+    private int codigo;
     private String titulo;
     private Timestamp fecha;
     private String usuario;
     private String tipo;
 
-    public Pdf(int codigopdf, String titulo, Timestamp fecha, String usuario, String tipo) {
-        this.codigopdf = codigopdf;
+    public Pdf(int codigo, String titulo, Timestamp fecha, String usuario, String tipo) {
+        this.codigo = codigo;
         this.titulo = titulo;
         this.fecha = fecha;
         this.usuario = usuario;
@@ -35,12 +35,12 @@ public class Pdf {
         this.tipo = tipo;
     }
 
-    public int getCodigopdf() {
-        return codigopdf;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setCodigopdf(int codigopdf) {
-        this.codigopdf = codigopdf;
+    public void setCodigo(int codigopdf) {
+        this.codigo = codigopdf;
     }
 
     public String getTitulo() {

@@ -55,7 +55,13 @@ public class SuscribirCulturismo extends HttpServlet {
                     && fecha != null && cvv != null) {
                 
                 try {
+
                     DaoUsuario.suscribir("Culturismo", u);
+                    
+                    u.setSuscripcion("Culturismo");
+                    sesion.setAttribute("usuario", u);
+                    request.setAttribute("usu", u);
+                    request.getRequestDispatcher("/entrenador/detallesAlumno.jsp").forward(request, response);
                 } catch (SQLException e) {
                     
                     System.out.println(e.getErrorCode());
@@ -63,7 +69,7 @@ public class SuscribirCulturismo extends HttpServlet {
                     System.out.println(e.getStackTrace());
                     
                 }
-                
+
             } else {
              
                 error = "Rellene todos los campos";

@@ -9,6 +9,8 @@ import dao.DaoUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +40,7 @@ public class ModificarUsuario extends HttpServlet {
         
         String nombreUsuario = request.getParameter("usuario");
         Usuario u = null;
+        String error = "";
         
         if (request.getParameter("modificar") == null) {
             try {
@@ -56,17 +59,69 @@ public class ModificarUsuario extends HttpServlet {
             String email = request.getParameter("email");
             String telefono = request.getParameter("telefono");
             String rol = request.getParameter("rol");
-            String asesoria = "";
+
+            //Si ninguna está vacía
+            if (nombre != null && apellidos != null && usuario != null && password != null  && email != null && telefono != null
+            && !nombre.isEmpty() && !apellidos.isEmpty() && !usuario.isEmpty() && !password.isEmpty()  && !email.isEmpty() && !telefono.isEmpty()) {
+                
+
+                
+                
+
+                    
+                        
+                        //Si el número de teléfono tiene el formato correcto
+                        if (telefono.length() == 9 && telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
+                            
+                            //Creamos un objeto usuario con la información del formulario
+                            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol);
+                            try { //Lo introducimos en la base de datos
+                                DaoUsuario.modificarUsuario(u);
+                                response.sendRedirect("MostrarUsuarios");
+                            } catch (SQLException ex) {
+                                System.err.println(ex.getClass().getName() + ":" + ex.getMessage());
+                                return;
+                            }
+                            
+                        } else { //Si el número de teléfono no es válido
+                            try {
+                            
+                            u = DaoUsuario.buscarUsuario(nombreUsuario);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            error = "Introduce un número válido de 9 dígitos.";
+                            request.setAttribute("error", error);
+                            request.setAttribute("usuarioModificar", u);
+                            request.getRequestDispatcher("/admin/modificarUsuario.jsp").forward(request, response);
+                        }
+                        
+                   
+                    
+                
+            } else { //Si alguna variable está vacía
+                try {
+                            
+                            u = DaoUsuario.buscarUsuario(nombreUsuario);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                error = "Rellene todos los campos";
+                request.setAttribute("error", error);
+                request.setAttribute("usuarioModificar", u);
+                request.getRequestDispatcher("/admin/modificarUsuario.jsp").forward(request, response);
+            } 
             
-            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, asesoria);
             
-            try {
-                DaoUsuario.modificarUsuario(u);
-            } catch (SQLException e) {
-                e.getStackTrace();
-            }
-            
-            response.sendRedirect("MostrarUsuarios");
+//            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol);
+//            
+//            try {
+//                DaoUsuario.modificarUsuario(u);
+//            } catch (SQLException e) {
+//                e.getStackTrace();
+//            }
+//            
+//            response.sendRedirect("MostrarUsuarios");
         
             
            

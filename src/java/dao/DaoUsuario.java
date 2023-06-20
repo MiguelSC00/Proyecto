@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import modelo.Usuario;
@@ -165,7 +166,8 @@ public class DaoUsuario {
             String telefono = rs.getString("telefono");
             String rol = rs.getString("rol");
             String suscripcion = rs.getString("suscripcion");
-            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, suscripcion);
+            Timestamp fechaSuscripcion = rs.getTimestamp("fecha_suscripcion");
+            u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, suscripcion, fechaSuscripcion);
         }
         desconectarBD(con);
         return u;
@@ -210,7 +212,7 @@ public class DaoUsuario {
         
         Connection con = conectarBD();
         PreparedStatement consulta = con.prepareStatement(
-                "update usuarios set suscripcion=? where usuario=?");
+                "update usuarios set suscripcion=?, fecha_suscripcion = NOW() where usuario=?");
         consulta.setString(1, sus);
         consulta.setString(2, usuario.getNombre());
         consulta.execute();
@@ -239,4 +241,61 @@ public class DaoUsuario {
         desconectarBD(con);
         return usuarios;
     }
+    
+    public static List<Usuario> filtrarCulturismo() throws SQLException {
+        List<Usuario> usuarios = new LinkedList();
+        Connection con = conectarBD();
+        PreparedStatement consulta = con.prepareStatement(
+                "select * from usuarios where suscripcion = 'Culturismo'");
+        ResultSet rs = consulta.executeQuery();
+        while (rs.next()) {
+            String usuario = rs.getString("usuario");
+            String password = rs.getString("password");
+            String nombre = rs.getString("nombre");
+            String apellidos = rs.getString("apellidos");
+            String email = rs.getString("email");
+            String telefono = rs.getString("telefono");
+            String rol = rs.getString("rol");
+            String suscripcion = rs.getString("suscripcion");
+            Usuario u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, suscripcion);
+            usuarios.add(u);
+        }
+        desconectarBD(con);
+        return usuarios;
+    }
+    
+    
+    public static List<Usuario> filtrarPowerlifting() throws SQLException {
+        List<Usuario> usuarios = new LinkedList();
+        Connection con = conectarBD();
+        PreparedStatement consulta = con.prepareStatement(
+                "select * from usuarios where suscripcion = 'Powerlifting'");
+        ResultSet rs = consulta.executeQuery();
+        while (rs.next()) {
+            String usuario = rs.getString("usuario");
+            String password = rs.getString("password");
+            String nombre = rs.getString("nombre");
+            String apellidos = rs.getString("apellidos");
+            String email = rs.getString("email");
+            String telefono = rs.getString("telefono");
+            String rol = rs.getString("rol");
+            String suscripcion = rs.getString("suscripcion");
+            Usuario u = new Usuario(usuario, password, nombre, apellidos, email, telefono, rol, suscripcion);
+            usuarios.add(u);
+        }
+        desconectarBD(con);
+        return usuarios;
+    }
+    
+        public static void terminarSuscripcion(Usuario usuario) throws SQLException {
+        
+        Connection con = conectarBD();
+        PreparedStatement consulta = con.prepareStatement(
+                "update usuarios set suscripcion='', fecha_suscripcion = null where usuario=?");
+        consulta.setString(1, usuario.getNombre());
+        consulta.execute();
+        desconectarBD(con);
+        
+    }
+    
 }

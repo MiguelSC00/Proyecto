@@ -10,6 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Alumnos</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <link rel="stylesheet" type="text/css" href="css/stylesAlumnos.css">
@@ -42,15 +44,15 @@
             <div class="contenido">
                 <div class="control">
                     <p>
-                        <a href="">Todos los alumnos</a>
+                        <a href="MostrarUsuariosSuscritos?filtro=todos">Todos los alumnos</a>
                     </p>
 
                     <p>
-                        <a href="">Culturismo</a>
+                        <a href="MostrarUsuariosSuscritos?filtro=culturismo">Culturismo</a>
                     </p>
 
                     <p>
-                        <a href="">Powerlifting</a>
+                        <a href="MostrarUsuariosSuscritos?filtro=powerlifting">Powerlifting</a>
                     </p>
                 </div>
 
@@ -77,7 +79,7 @@
                                     <a href="DetallesUsuario?usuario=${u.usuario}"><img src="img/ver.png" alt="" height="25px" width="25px">
                                 </td>
                                 <td class="eliminar">
-                                    <a href="DetallesUsuario?usuario=${u.usuario}"><img src="img/correo.png" alt="" height="25px" width="25px">
+                                    <a href="EnviarEmail?usuario=${u.usuario}"><img src="img/correo.png" alt="" height="25px" width="25px">
                                 </td>
                             </tr>
                             </c:forEach>

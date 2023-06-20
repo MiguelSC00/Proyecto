@@ -6,14 +6,16 @@
 package controladores;
 
 
+import dao.DaoPdf;
 import dao.DaoUsuario;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,60 +51,137 @@ public class CrearPdfEntrenador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if (request.getParameter("submitEntrenador") == null) {
-            response.sendRedirect("entrenador/subirPdfEntrenador.jsp");
-            return;
+        String titulo = request.getParameter("titulo");
+        String usuario = request.getParameter("nombreUsuario");
+            
+    
+        Pdf pdf = new Pdf(titulo, usuario, "Plan");
+        try {
+            DaoPdf.crearPdf(pdf);
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearPdfEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String ruta = "archivosPdf\\";
-        File uploads = new File(ruta);
-        String extension = ".pdf";
+        Pdf ultimo = null;
         
-        String error = "";
-        
-        
-        Part part = request.getPart("archivo");
-        
-        if (part == null) {
-            error = "No ha seleccionado ningún archivo";
-        } else {
-            
-            if (tieneExtension(part.getSubmittedFileName(), extension)) {
-                
-                String hola = saveFile(part, uploads);
-                
-            } else {
-                error = "El archivo tiene que ser .pdf";
-            }
-            
+        try {
+            ultimo = DaoPdf.getUltimoPdf();
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearPdfEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
+//        String savePath = "archivosPdf"; // Especifica la ruta donde quieres guardar el archivo
+//
+//
+//        Part part = request.getPart("fichero");
+//        String fileName = getFileName(part);
+//
+//        InputStream inputStream = part.getInputStream();
+//        Files.copy(inputStream, new File(savePath + File.separator + fileName).toPath(),
+//                StandardCopyOption.REPLACE_EXISTING);
         
+
+        
+        
+//        int ultimoCodigo = ultimo.getCodigo();
+//        
+//        Part filePart = request.getPart("fichero");
+//
+//            // Obtiene el nombre del archivo
+//            String fileName = filePart.getSubmittedFileName();
+//
+//            // Define la ruta de almacenamiento del archivo en el servidor
+//            String rutaDestino = getServletContext().getRealPath("/") + "archivosPdf/" + fileName;
+//            System.out.println(rutaDestino);
+//            File uploadDirFile = new File(rutaDestino);
+
+            
+
+//            // Guarda el archivo en el servidor
+//            filePart.write(rutaDestino + File.separator + fileName);
+//            Files.copy(filePart.getInputStream(), rutaDestino);
+        
+        
+        // Directorio en el servidor donde se guardarán los archivos
+        
+
+//        // Obtiene el archivo enviado por el usuario
+//        Part archivoPart = request.getPart("fichero");
+//        
+//        // Obtiene el nombre del archivo
+//        String nombreArchivo = getSubmittedFileName(archivoPart);
+//        
+//        String rutaDestino = getServletContext().getRealPath("/") + "archivosPdf/" + nombreArchivo;
+//
+//        Files.copy(archivoPart.getInputStream(), Path.of(rutaDestino));
+
+
+        // Guarda el archivo en el servidor
+
+
+        
+        
+//        Part fichero = request.getPart("fichero");
+//        String nombreFichero = fichero.getSubmittedFileName();
+//        InputStream datosFichero = fichero.getInputStream();
+//        String path = getServletContext().getRealPath("archivosPdf");
+//        FileOutputStream fos = new FileOutputStream(path + "/" + nombreFichero);
+//        while (datosFichero.available() > 0) {
+//            fos.write(datosFichero.read());
+//        }
+//        fos.close();
+//        datosFichero.close();
+
+//        Part fichero = request.getPart("fichero");
+//        String nombre = fichero.getSubmittedFileName();
+//        String path = getServletContext().getRealPath("archivosPdf");
+//        System.out.println(path);
+//        System.out.println(nombre);
+//        fichero.write("/" + fichero.getSubmittedFileName());
+//        for (Part part : request.getParts()) {
+//            part.write("archivosPdf" + nombre);
+//        }
+        
+        String us = "";
+            
+        try {
+            Usuario u = DaoUsuario.buscarUsuario(usuario);
+            us =  u.getUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearPdfEntrenador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.setAttribute("usuario", us);
+        getServletContext().getRequestDispatcher("/DetallesUsuario").forward(request, response);
         
     }
     
-    private String saveFile(Part part, File pathUploads) {
-        String pathAbsolute = "";
-        
-        try {
-            
-            Path path = Paths.get(part.getSubmittedFileName());
-            String fileName = path.getFileName().toString();
-            InputStream input = part.getInputStream();
-            
-            if (input != null) {
-                File file = new File(pathUploads, fileName);
-                pathAbsolute = file.getAbsolutePath();
-                Files.copy(input, file.toPath());
+    private String getFileName(Part part) {
+        String contentDispositionHeader = part.getHeader("content-disposition");
+        String[] elements = contentDispositionHeader.split(";");
+        for (String element : elements) {
+            if (element.trim().startsWith("filename")) {
+                return element.substring(element.indexOf("=") + 1).trim().replace("\"", "");
             }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        
-        return pathAbsolute;
+        return null;
     }
+    
+    
+    private String getSubmittedFileName(Part part) {
+        String nombreArchivo = null;
+        String header = part.getHeader("content-disposition");
+        if (header != null) {
+          for (String headerPart : header.split(";")) {
+            if (headerPart.trim().startsWith("filename")) {
+              nombreArchivo = headerPart.substring(headerPart.indexOf('=') + 1).trim().replace("\"", "");
+              break;
+            }
+          }
+        }
+        return nombreArchivo;
+      }
+    
     
     private boolean tieneExtension(String fileName, String extension) {
         if (fileName.toLowerCase().endsWith(extension)) {

@@ -44,8 +44,12 @@ table tr td:nth-child(8), table tr td:nth-child(7) {
 
 @media (max-width: 1300px) {
 
+    .contenido {
+        flex-direction: column;
+    }
+    
     section {
-        margin: 0 auto;
+        margin: 100px auto;
         width: 90%;
     }
 
@@ -76,6 +80,12 @@ table tr td:nth-child(8), table tr td:nth-child(7) {
         content: attr(data-titulo);
         width: 80px;
         font-weight: bolder;
+    }
+    
+    .control {
+        padding-right: 0;
+        border-right: none;
+        border-bottom:  1px solid gray;
     }
 
 }

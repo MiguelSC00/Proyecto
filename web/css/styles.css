@@ -72,29 +72,57 @@ body {
     color: white;
 }
 
-.pagina-actual {
-    border: 3px solid white;
-    border-radius: 25px;
+.menu-burguer {
+    filter: invert(1);
+    position: absolute;
+    rigth: 50px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
 }
 
-.barras {
-    width: 50px;
-    height: 50px;
+.menu-responsive {
+    list-style: none;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-responsive li {
+    margin-right: 50px;
+    padding: 1rem .8rem 1rem .8rem;
+}
+
+.menu-responsive li a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-responsive {
+    width: 100%;
+    position: fixed;
+    background-color: rgb(15, 15, 15);
+    height: fit-content;
+    top: 75px;
     display: none;
 }
 
-@media (max-width: 900px) {
+
+@media (max-width:  1000px) {
     .menu {
         flex-direction: column;
     }
 
-    .barras {
-        display: block;
+    .menu-burguer {
+        filter: invert(1);
+        position: absolute;
+        right: 50px;
+        visibility:visible;
+        opacity: 1;
+        transition: visibility 0s, opacity 0.5s linear;
     }
-}
+    
 
-@media (max-width: 900px) {
-    .fixed-nav a {
+    .menu {
         display: block;
         text-align: center;
         margin: 0;
@@ -103,23 +131,33 @@ body {
         transition: visibility 0s, opacity 0.5s linear;
     }
 
-    .barras:hover {
-        cursor: pointer;
-    }
-
-    .barras:hover ~ .fixed-nav a {
-        visibility: visible;
-        opacity: 1;
-    }
-
     .header-secundario {
         height: 40vh;
     }
+
+    .fixed-nav {
+        height: 75px;
+        background-color: rgb(15, 15, 15);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
 }
 
+
 @media (max-width: 1200px) {
+    .nosotros {
+        height: 1400px;
+    }
+
     .contenido-nosotros {
         flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -180,6 +218,8 @@ footer {
 
 .iconos-redes {
     width: 150px;
+    margin: auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,7 +230,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 650px;
+    height: auto;
 }
 
 .contenido-nosotros {
@@ -231,7 +271,7 @@ footer {
 
 .asesorias {
     width: 80%;
-    height: 700px;
+    height: auto;
     background-color: rgb(15, 15, 15);
     border-radius: 10px;
     color: aliceblue;
@@ -248,8 +288,8 @@ footer {
 }
 
 .p-asesorias {
-    max-width: 700px;
-    height: 400px;
+
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -260,4 +300,48 @@ footer {
 
 .asesorias img {
     border-radius: 10px;
+}
+
+
+@media (max-width:  600px) {
+
+    .titulo {
+        width: 30rem;
+        height: 10rem;
+    }
+
+    .texto-titulo {
+        font-size: 1rem;
+    }
+
+
+
+    .contenido-nosotros {
+        width: 100%;
+    }
+
+    .iconos-nosotros {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .asesorias {
+        width: 100%;
+    }
+
+    .flex-se {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .asesorias img {
+        width: 100%;
+        height: auto;
+    }
+
+    .p-asesorias {
+        padding: 0;
+        font-size: 1.5rem;
+    }
+
 }

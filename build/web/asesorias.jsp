@@ -44,9 +44,6 @@
                 <div class="nombre">
                     <p>ASESORÍA ONLINE CULTURISMO</p>
                 </div>
-                <div class="tiempo">
-                    <p>Mensual</p>
-                </div>
                 <div class="precio">
                     <p>59,99$</p>
                 </div>
@@ -68,9 +65,6 @@
             <div class="info" onclick="location.href='powerlifting.jsp'">
                 <div class="nombre">
                     <p>ASESORÍA ONLINE POWERLIFTING</p>
-                </div>
-                <div class="tiempo">
-                    <p>Mensual</p>
                 </div>
                 <div class="precio">
                     <p>69,99$</p>

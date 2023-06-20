@@ -3,7 +3,7 @@
     Created on : 6 jun 2023, 20:33:57
     Author     : Miguel
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,24 @@
     </head>
     <body>
         
-        <jsp:include page="../headerEntrenador.jsp"/>
+        <c:choose>
+            <c:when test="${empty usuario}">
+                <jsp:include page="header.jsp"/>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${usuario.getRol().equals('Administrador')}">
+                        <jsp:include page="../headerAdmin.jsp"/>
+                    </c:when>
+                    <c:when test="${usuario.getRol().equals('Entrenador')}">
+                        <jsp:include page="../headerEntrenador.jsp"/>
+                    </c:when>
+                    <c:otherwise>
+                        <jsp:include page="../headerCliente.jsp"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
         
         <section>
 
@@ -54,19 +71,25 @@
                     <table>
                         <thead>
                             <tr>
-                                <th colspan="2">Entrenamientos</th>
-                                <th class="adjuntar"><a href="CrearPdfEntrenador?nombreUsuario=${usu.getUsuario()}"><img src="img/adjuntar-archivo.png" alt="" width="30px" height="30px"></a></th>
+                                <th colspan="3">Entrenamientos</th>
+                                <c:if test="${usuario.getRol() == 'Entrenador'}">
+                                <th class="adjuntar oculta" ><a href="entrenador/subirPdfEntrenador.jsp?nombreUsuario=${usu.getUsuario()}"><img src="img/adjuntar-archivo.png" alt="" width="30px" height="30px"></a></th>
+                                </c:if>
+                                
                             </tr>
-                            <tr>
+                            <tr class="oculta">
+                                <th>Título</th>
                                 <th>Fecha</th>
                                 <th>Archivo PDF</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>06/06/2023</td>
-                                <td><a href="AbrirPdf"><img src="img/pdf.png" alt="" width="40px" height="40px"></a></td>
+                            <c:forEach items="${planes}" var="p">
+                            <tr><td>${p.titulo}</td>
+                                <td>${p.fecha}</td>
+                                <td><a href="archivosPdf/${p.codigo}.pdf" target="_blank"><img src="img/pdf.png" alt="" width="40px" height="40px"></a></td>
                             </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -75,18 +98,25 @@
                     <table>
                         <thead>
                             <tr>
-                                <th colspan="2">Revisiones</th>
+                                <th colspan="3">Revisiones</th>
+                                <c:if test="${usuario.getRol() == 'Cliente'}">
+                                    <th class="adjuntar oculta" ><a href="subirPdfCliente.jsp"><img src="img/adjuntar-archivo.png" alt="" width="30px" height="30px"></a></th>
+                                </c:if>
                             </tr>
-                            <tr>
+                            <tr class="oculta">
+                                <th>Título</th>
                                 <th>Fecha</th>
                                 <th>Archivo PDF</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach items="${reportes}" var="r">
                             <tr>
-                                <td>06/06/2023</td>
-                                <td><img src="img/pdf.png" alt="" width="40px" height="40px"></td>
+                                <td>${r.titulo}</td>
+                                <td>${r.fecha}</td>
+                                <td><a href="archivosPdf/${r.codigo}.pdf" target="_blank"><img src="img/pdf.png" alt="" width="40px" height="40px"></a></td>
                             </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

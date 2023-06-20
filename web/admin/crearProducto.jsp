@@ -56,7 +56,7 @@
 
                         <div>
                           <label for="stock">Stock</label>
-                          <input type="number" name="stock" id="stock">
+                          <input type="number" name="stock" id="stock" required="">
                         </div>
 
                         <div>

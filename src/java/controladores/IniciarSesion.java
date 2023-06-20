@@ -5,13 +5,19 @@
  */
 package controladores;
 
+import dao.DaoProducto;
 import dao.DaoUsuario;
 import modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +51,6 @@ public class IniciarSesion extends HttpServlet {
         String password = request.getParameter("passwordI");
         
         
-        
         //Si ninguna está vacía
         if (usuario != null && password != null && !usuario.isEmpty() && !password.isEmpty()) {
             
@@ -60,6 +65,16 @@ public class IniciarSesion extends HttpServlet {
             
             if (u != null) {  // Si se ha encontrado el usuario en la BD
                 if (u.getPassword().equals(password)) { //y la contraseña es correcta
+                    if (!u.getSuscripcion().isEmpty()) {
+                        comprobarSuscripcion(u);
+                    }
+                    
+                    try {
+                        u = DaoUsuario.buscarUsuario(usuario);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     HttpSession sesion = request.getSession();
                     sesion.setAttribute("usuario", u);
                     
@@ -68,6 +83,7 @@ public class IniciarSesion extends HttpServlet {
                     
                     List<Integer> cantidades = new ArrayList();
                     sesion.setAttribute("cantidades", cantidades);
+                 
                     
                     if (u.getRol().equals("Administrador")) { //Si el usuario es admin
                         response.sendRedirect("CargarPanel");
@@ -90,6 +106,39 @@ public class IniciarSesion extends HttpServlet {
         //Se manda el error de vuelta a la página de registro
         request.setAttribute("error", error);
         getServletContext().getRequestDispatcher("/iniciarSesion.jsp").forward(request, response);
+        
+    }
+    
+    public static void comprobarSuscripcion(Usuario u) {
+        
+        // Crear dos objetos Timestamp con las fechas que deseas restar
+        Timestamp timestamp1 = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp2 = u.getFechaSuscripcion();
+
+        // Convertir los objetos Timestamp a objetos Date
+        Date date1 = new Date(timestamp1.getTime());
+        Date date2 = new Date(timestamp2.getTime());
+
+        // Crear objetos Calendar y asignar las fechas
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(date1);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(date2);
+
+        // Restar los campos de fecha correspondientes (año, mes, día)
+        double diffYear = calendar1.get(Calendar.YEAR) - calendar2.get(Calendar.YEAR);
+        double diffMonth = diffYear * 12 + calendar1.get(Calendar.MONTH) - calendar2.get(Calendar.MONTH);
+
+        if (diffMonth > 0) {
+            try {
+                DaoUsuario.terminarSuscripcion(u);
+            } catch (SQLException ex) {
+                Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        // Imprimir el resultado
+        System.out.println("Diferencia en meses: " + diffMonth);
         
     }
 

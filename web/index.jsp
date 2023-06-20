@@ -70,7 +70,7 @@
                     <p>
                         El deportista decide la modalidad deportiva que quiere 
                         entrenar. Nos adaptamos a todas las disciplinas. 
-                        Powerlifting, culturismo, ? etc.
+                        Powerlifting, culturismo, etc.
                     </p>
                 </div>
             </div>
@@ -130,12 +130,12 @@
             </div>
         </div>
     </section>
-
+    <!-- comment
     <section class="contenedor seccion">
         <div>
             <h1>TIENDA</h1>
         </div>
-        
+        --> 
         <!---<div class="contenedor carrusel">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -163,13 +163,13 @@
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
-        </div> --->
+        </div> 
 
         <div>
             <button class="boton-mas" onclick="location.href='tienda.jsp'">Ir a la tienda</button>
         </div>
     </section>
-
+--->
     <footer>
         <div>
             <div class="iconos-redes">

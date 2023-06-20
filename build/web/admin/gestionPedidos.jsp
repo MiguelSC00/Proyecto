@@ -10,6 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <link rel="stylesheet" type="text/css" href="css/stylesGestionUsuarios.css">
         <title>JSP Page</title>
@@ -61,9 +63,7 @@
                         <td><c:out value="${p.precio}"/></td>
                         <td><c:out value="${p.getDireccion()}"/></td>
                         <td><c:out value="${p.estado}"/></td>
-                        <td class="modificar">
-                            <a href="ModificarPedido?codigo=${p.codigo}"><img src="img/icono_modificar.png" alt="" height="25px" width="25px"></a>
-                        </td>
+                      
                         <td class="eliminar">
                             <a href="EliminarPedido?codigo=${p.codigo}"><img src="img/icono_eliminar.png" alt="" height="25px" width="25px"></a>
                         </td>

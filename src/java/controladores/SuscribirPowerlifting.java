@@ -39,13 +39,29 @@ public class SuscribirPowerlifting extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         Usuario u = (Usuario)sesion.getAttribute("usuario");
+        String error= "";
+        
+        String tarjeta = request.getParameter("tarjeta");
+        String fecha = request.getParameter("fechaCaducidad");
+        String cvv = request.getParameter("cvv");
+        
+        
         
         if (u == null) {
             response.sendRedirect("iniciarSesion.jsp");
         } else {
+            
+            if (!tarjeta.isEmpty() && !fecha.isEmpty() && !cvv.isEmpty() && tarjeta != null
+                    && fecha != null && cvv != null) {
                 
-                try {
+                try {                   
                     DaoUsuario.suscribir("Powerlifting", u);
+                    
+                    u.setSuscripcion("Powerlifting");
+                    sesion.setAttribute("usuario", u);
+                    
+                    request.setAttribute("usu", u);
+                    request.getRequestDispatcher("/entrenador/detallesAlumno.jsp").forward(request, response);
                 } catch (SQLException e) {
                     
                     System.out.println(e.getErrorCode());
@@ -54,7 +70,18 @@ public class SuscribirPowerlifting extends HttpServlet {
                     
                 }
                 
+                
+                
+            } else {
+             
+                error = "Rellene todos los campos";
+                request.setAttribute("error", error);
+                getServletContext().getRequestDispatcher("/formularioSuscripcionCulturismo.jsp").forward(request, response);
+                
+            }
+            
         }
+        
         
         
         

@@ -9,6 +9,8 @@ import dao.DaoProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,13 +53,16 @@ public class ModificarProducto extends HttpServlet {
             }
         } else {
             
+            
             int codigo = Integer.parseInt(request.getParameter("codigo"));
             String nombre = request.getParameter("nombre");
             String precioStr = request.getParameter("precio");
             double precio = 0;
             int stock = Integer.parseInt(request.getParameter("stock"));
             
-            if (precioStr.matches(patron)) {
+            if (!nombre.isEmpty() && nombre != null && !precioStr.isEmpty() && precioStr != null) {
+                
+                if (precioStr.matches(patron)) {
                     
                     precio = Double.parseDouble(precioStr);
                     
@@ -71,19 +76,45 @@ public class ModificarProducto extends HttpServlet {
                             e.getStackTrace();
                         }
 
-                        response.sendRedirect("MostrarProductos");
+                        response.sendRedirect("MostrarProductos?target=modificar");
                         
                     } else {
+                        try {
+                            p = DaoProducto.buscarProducto(codigoModificar);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        request.setAttribute("productoModificar", p);
                         error = "Introduce un precio mayor que 0";
                         request.setAttribute("error", error);
                         getServletContext().getRequestDispatcher("/admin/modificarProducto.jsp").forward(request, response);
                     }
                     
                 } else {
+                    try {
+                        p = DaoProducto.buscarProducto(codigoModificar);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    request.setAttribute("productoModificar", p);
                     error = "Introduce el precio con el formato: (Parte entera).(Dos decimales).";
                     request.setAttribute("error", error);
                     getServletContext().getRequestDispatcher("/admin/modificarProducto.jsp").forward(request, response);
                 }
+                
+            } else {
+                    try {
+                            p = DaoProducto.buscarProducto(codigoModificar);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    request.setAttribute("productoModificar", p);
+                    error = "Rellene todos los campos";
+                    request.setAttribute("error", error);
+                    getServletContext().getRequestDispatcher("/admin/modificarProducto.jsp").forward(request, response);
+            }
+            
+            
             
             
         
